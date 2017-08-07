@@ -1,0 +1,41 @@
+.terminal-platforms {
+  overflow-y: auto;
+  max-height: 130px;
+}
+
+.platform{
+  border-top: solid $light-gray 1pt;
+}
+
+.platform-icon {
+  height: 2em;
+  width: 2em;
+  float: left;
+  margin: 0 0.5em;
+}
+
+.marker-select-popup {
+  .card-row {
+    max-height: 176px;
+  }
+}
+
+.select-row {
+  display: flex;
+  flex-direction: row;
+  padding-right: 0.5em;
+}
+
+.select-row-icon {
+  width: 40px;
+  text-align: center;
+  .icon {
+    font-size: 24px;
+  }
+}
+.select-row-text {
+  flex: 1 0 0;
+  .vehicle-number {
+    padding: 0 2px;
+  }
+}

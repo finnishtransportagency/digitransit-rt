@@ -1,0 +1,224 @@
+/*
+  Helper Classes
+  These classes may be used through out the application on any DOM-element
+*/
+
+/* COLOR */
+.airplane {
+  color: $airplane-color;
+}
+.bus {
+  color: $bus-color;
+}
+.tram {
+  color: $tram-color;
+}
+.subway {
+  color: $metro-color;
+}
+.rail {
+  color: $rail-color;
+}
+.ferry {
+  color: $ferry-color;
+}
+.car {
+  color: $car-color;
+}
+.citybike {
+  color: $citybike-color;
+}
+.citybike_walk {
+  color: $citybike-color;
+}
+.walk {
+  color: $walk-color;
+}
+.bicycle {
+  color: $bicycle-color;
+}
+.bicycle_walk {
+  color: $bicycle-color;
+}
+.via {
+  color: $walk-color;
+}
+.from {
+  color: $from-color;
+}
+.realtime {
+  color: $realtime-color;
+}
+.to {
+  color: $to-color;
+}
+.viewpoint {
+  color: $viewpoint-marker-color;
+}
+.gray {
+  color: $gray;
+  p {
+    color: $gray;
+  }
+}
+
+.link-color {
+  color: $link-color;
+}
+
+/* Positioning */
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.text-left {
+  text-align: left;
+}
+.inline-block {
+  display: inline-block;
+}
+.clear  {
+  float:none;
+  clear:both;
+}
+// parent DOM-element requires overflow:hidden; height: x;
+.scrollable {
+  overflow: auto;
+  flex: 1;
+}
+.fullscreen {
+  position: relative;
+  height: 100%;
+}
+.padding-small  {
+  padding: 0.45em 1em;
+}
+.padding-normal  {
+  padding: 0.7em 1em;
+}
+.padding-vertical-small {
+  padding: 0.45em 0;
+}
+.padding-vertical-normal {
+  padding: 0.6em 0;
+}
+.padding-horizontal {
+  padding: 0 1em;
+}
+.padding-horizontal-large {
+  padding: 0 2em;
+}
+.no-padding  {
+  padding: 0 !important;
+}
+.no-margin  {
+  margin: 0 !important;
+}
+/* Appearance */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* TODO Remove this - setting only the font-weight can give wrong combinations,
+        as main and secondary families have different weights for bold. */
+.bold {
+  font-weight: $font-weight-bold;
+}
+.no-decoration  {
+  text-decoration: none;
+}
+.large-text {
+  font-size: 1.1em;
+}
+.uppercase  {
+  text-transform: uppercase;
+}
+.capitalize {
+  text-transform: capitalize;
+}
+.hover  {
+  &:hover {
+    opacity:0.8;
+    transition: 0.1s ease-in-out;
+  }
+}
+.hide-dropdown  {
+  background-image: none;
+}
+.large-icon {
+  width: 20px;
+  height: 20px;
+}
+body .large {
+  //font-size: 23px;
+  & .icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+.border-bottom  {
+  border-bottom: 1px solid $light-gray;
+}
+.border-top  {
+  border-top: 1px solid $light-gray;
+}
+.border-dashed  {
+  border: 1px dashed $light-gray;
+}
+.hidden {
+  visibility: hidden;
+}
+
+.page-frame {
+  padding: 10px;
+}
+
+.call-to-action-button {
+  @include font-medium;
+  color: white;
+  background: $standalone-btn-color;
+  vertical-align: middle;
+  border-radius: 1.5em;
+  padding: 0.5em 1.5em;
+  text-align: center;
+  max-width: 500px;
+  margin-top: 25px;
+  margin-bottom: 18px;
+  margin-left: auto;
+  margin-right: auto;
+
+  &:active {
+    background: $standalone-btn-active-color;
+  }
+}
+
+.page-not-found {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+
+  svg {
+    height: 130px;
+    width: 150px;
+  }
+
+  p {
+    font-size: $font-size-large;
+    a {
+      font-size: $font-size-large;
+      color: $primary-color;
+      border-bottom: 1px dotted;
+      text-decoration: none;
+    }
+  }
+}

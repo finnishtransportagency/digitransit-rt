@@ -1,0 +1,147 @@
+.stop-page-content-wrapper {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.stop-page-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.stop-page.header {
+  background-color: $background-color;
+  @include font-bold;
+}
+
+.desktop .stop-page.header {
+  .h3 {
+    font-size: 24px;
+  }
+  .sub-header-h4 {
+    font-size: 18px;
+  }
+
+  .card-code {
+    font-size: 14px;
+  }
+}
+
+.selected-stop-popup {
+  p {
+    display: inline;
+  }
+  .card-code {
+    border: 1px solid $light-gray;
+    border-radius: $border-radius;
+    font-size: $font-size-xxsmall;
+    color: $gray-blue;
+    margin-right: 3px;
+    padding: 0px 2px 0px 2px;
+  }
+  .description {
+    color: $gray-blue;
+  }
+}
+
+
+.stop-page-content > .departure-list {
+  flex-basis: 0;
+  flex-grow: 20;
+  transition: flex-grow 300ms;
+
+  &.stop-page-content-enter, &.stop-page-content-leave {
+    will-change: flex-grow;
+  }
+
+  &.stop-page-content-enter.stop-page-content-enter-active {
+    flex-grow: 20;
+  }
+
+  &.stop-page-content-enter, &.stop-page-content-leave.stop-page-content-leave-active {
+    flex-grow: 0;
+  }
+}
+
+.stop-page.departure-list {
+  .departure {
+    .time {
+      width: 3.7em;
+      padding-right: $padding-medium;
+      margin-right: $padding-medium;
+    }
+    .route-number {
+      width: 3.7em;
+    }
+    .route-destination {
+      padding-left: $padding-medium;
+    }
+  }
+}
+
+.desktop .stop-page.departure-list {
+  .departure {
+    .time {
+      margin-right: $padding-large;
+    }
+    .route-destination {
+      padding-left: $padding-medium;
+    }
+  }
+}
+
+.selected-stop-header {
+  color: $black;
+}
+
+#stop-page-action-bar {
+  box-shadow: 0px -1px 0px 0px rgba(0,0,0,0.1);
+  z-index: 400; //get shadow over map
+  padding: 5px 10px;
+  text-align:right;
+}
+
+.action-bar {
+  a.external-link {
+    font-size: $font-size-xxsmall;
+    color: $gray-blue;
+    svg.icon {
+      top:3px;
+      font-size:14px;
+      position: relative;
+    }
+  }
+  .external-link-icon-outer{
+    color: #eef1f3;
+  }
+  .external-link-icon {
+    color: $gray-blue;
+  }
+}
+
+hr.action-bar {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid #ddd;
+  width:100%;
+  padding-bottom: 8px;
+}
+
+.desktop {
+  #stop-page-action-bar {
+    box-shadow: none;
+    height: auto;
+    padding: 10px 20px 8px 20px;
+  }
+  .action-bar {
+    a.external-link {
+      font-size: 14px;
+      line-height:22px;
+      svg.icon {
+        font-size:18px;
+      }
+    }
+  }
+}

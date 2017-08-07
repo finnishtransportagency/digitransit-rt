@@ -1,0 +1,341 @@
+
+.departure  {
+  // parent class for time, vehicle-number, destination
+  background: $white;
+  line-height: $line-height-normal;
+  position: relative;
+  overflow-y: visible;
+  white-space: nowrap;
+  margin: 0;
+
+  .vehicle-number {
+    width: 2.5em;
+  }
+
+  & .route-number {
+    width: 3em;
+  }
+  .icon {
+    font-size: 0.85em;
+    vertical-align: -1px;
+  }
+  .route-destination {
+    padding-left: 0.5em;
+  }
+}
+
+.route-detail-text {
+  color: $black;
+  @include font-narrow-book;
+  font-size: $font-size-normal;
+}
+
+.time,
+.vehicle-number,
+.destination,
+.platform-number,
+.bicycle-rental-station,
+.city-bike-station-name,
+.city-bike-station-availability {
+  display: inline-block;
+}
+
+.time {
+  @include font-narrow-medium;
+  width: 3.25em;
+  padding-right: 0.25em;
+  margin-right: 0.25em;
+  text-align: right;
+}
+
+.vehicle-number {
+  @include font-narrow-medium;
+  padding: 0 5px;
+  vertical-align: top;
+}
+.departure > div, .departure > span {
+    vertical-align: middle;
+}
+
+.desktop .route-destination {
+  width: calc(100% - 12.5em);
+}
+
+.route-destination {
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  width: calc(100% - 10.5em);
+  height: 1.2em;
+
+  .last-stop-icon {
+    vertical-align: middle;
+    display: inline-block;
+
+    &::after {
+      vertical-align: middle;
+    }
+
+    &.bus::after {
+      content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='19' height='19'><line x1='2' y1='10' x2='10' y2='10' stroke='#{rgba($bus-color, 0.9999999)}' stroke-width='3.5' stroke-linecap='round'/><circle stroke-width='2.5' stroke='#{rgba($bus-color, 0.9999999)}' fill='white' cx='11' cy='10' r='4'/></svg>");
+    }
+    &.tram::after{
+      content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='19' height='19'><line x1='2' y1='10' x2='10' y2='10' stroke='#{rgba($tram-color, 0.9999999)}' stroke-width='3.5' stroke-linecap='round'/><circle  stroke-width='2.5' stroke='#{rgba($tram-color, 0.9999999)}' fill='white' cx='10' cy='10' r='4'/></svg>");
+    }
+    &.rail::after{
+      content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='19' height='19'><line x1='2' y1='10' x2='10' y2='10' stroke='#{rgba($rail-color, 0.9999999)}' stroke-width='3.5' stroke-linecap='round'/><circle  stroke-width='2.5' stroke='#{rgba($rail-color, 0.9999999)}' fill='white' cx='10' cy='10' r='4'/></svg>");
+    }
+    &.subway::after{
+      content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='19' height='19'><line x1='2' y1='10' x2='10' y2='10' stroke='#{rgba($metro-color, 0.9999999)}' stroke-width='3.5' stroke-linecap='round'/><circle  stroke-width='2.5' stroke='#{rgba($metro-color, 0.9999999)}' fill='white' cx='10' cy='10' r='4'/></svg>");
+    }
+    &.ferry::after{
+      content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='19' height='19'><line x1='2' y1='10' x2='10' y2='10' stroke='#{rgba($ferry-color, 0.9999999)}' stroke-width='3.5' stroke-linecap='round'/><circle  stroke-width='2.5' stroke='#{rgba($ferry-color, 0.9999999)}' fill='white' cx='10' cy='10' r='4'/></svg>");
+    }
+    &.citybike::after{
+      content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='19' height='19'><line x1='2' y1='10' x2='10' y2='10' stroke='#{rgba($citybike-color, 0.9999999)}' stroke-width='3.5' stroke-linecap='round'/><circle  stroke-width='2.5' stroke='#{rgba($citybike-color, 0.9999999)}' fill='white' cx='10' cy='10' r='4'/></svg>");
+    }
+  }
+}
+
+.popup .route-destination:last-child {
+  width: calc(100% - 7.5em);
+}
+
+.popup .route-destination {
+  width: calc(100% - 9.5em);
+}
+
+.distance {
+  display: inline-block;
+}
+
+.platform-number {
+  @include font-narrow-book;
+  width: 3em;
+  color: $gray;
+  font-size: $font-size-small;
+  text-align: right;
+}
+
+// route-number component
+.route-number {
+  vertical-align: top;
+  position: relative;
+  display: inline-block;
+  &.vertical {
+    text-align: center;
+  }
+}
+
+.icon.realtime-icon {
+  position: relative;
+  top: -0.7em;
+  left: 0.1em;
+  height: 0.5em;
+  width: 0.5em;
+}
+
+.canceled .time, .time.canceled {
+  position: relative;
+  display: inline-block;
+  color: $cancelation-black;
+  background-color: $cancelation-background;
+  border-radius: $border-radius;
+  &::before,
+  &::after {
+    content: '';
+    width: 1.5em;
+    position: absolute;
+    left: 0.825em;
+    top: 50%;
+    opacity: 0.5;
+    border-bottom: 1px solid $cancelation-red;
+  }
+  &::before {
+    transform: skewY(-30deg);
+  }
+  &::after {
+    transform: skewY(30deg);
+  }
+}
+
+.card .canceled .time {
+  margin-top: inherit;
+  margin-bottom: inherit;
+  padding-top: inherit;
+  padding-bottom: inherit;
+}
+
+.next-departure-row  {
+  background: $white;
+  line-height: $line-height-normal;
+  position: relative;
+  overflow-y: visible;
+  white-space: nowrap;
+  margin: 0;
+  padding-left: 0;
+
+  color: $black;
+  @include font-narrow-book;
+  font-size: $font-size-normal;
+
+  a {
+    color: inherit;
+  }
+
+  .route-number {
+    padding-left: 0.25em;
+    width: 3.5em;
+    vertical-align: middle;
+    margin-bottom: -2px;
+    overflow: hidden;
+  }
+  .vehicle-number {
+    vertical-align: top;
+
+    .icon {
+      font-size: 16px;
+    }
+  }
+  .distance {
+    width: 3em;
+    color: $gray;
+    text-align: right;
+    margin-right: 0.5em;
+    font-size: $font-size-small;
+  }
+  .route-destination {
+    width: calc(100% - 14em);
+    padding-left: 0.5em;
+    vertical-align: bottom;
+  }
+  .city-bike-station-name {
+    width: calc(100% - 10.5em);
+    vertical-align: bottom;
+    padding-left: 0.5em;
+  }
+  .bicycle-rental-station {
+    position: relative;
+    width: calc(100% - 3.5em);
+    background-color: rgb(238, 241, 243);
+    margin-top: -0.6em;
+    margin-bottom: -0.5em;
+    margin-left: -0.25em;
+    padding: 0.3em 0.25em;
+    border-radius: $border-radius;
+  }
+  .city-bike-station-availability {
+    text-align: right;
+    width: 7em;
+    padding-right: 0.25em;
+    .icon {
+      margin-left: 0.5em;
+      font-size: 12px;
+    }
+  }
+  .bikes-label {
+    font-size: $font-size-small;
+    color: $gray;
+  }
+  .bikes-available {
+    padding-left: 0.25em;
+    font-weight: 700;
+  }
+
+  & > div,
+  & > span {
+    vertical-align: middle;
+  }
+}
+
+.next-departures-list-header {
+  color: $gray;
+  @include font-narrow-book;
+  font-size: $font-size-normal;
+  white-space: nowrap;
+  margin: 0;
+  line-height: 1em;
+
+  & > span {
+    display: inline-block;
+    vertical-align: top;
+    & > span {
+      font-size: $font-size-small;
+    }
+  }
+  .distance-header {
+    width: 3em;
+    margin-right: 0.5em;
+    text-align: right;
+  }
+  .route-number-header {
+    width: 3.5em;
+  }
+  .route-destination-header {
+    font-size: $font-size-xsmall;
+  }
+  .time-header {
+    float: right;
+    font-weight: inherit;
+    text-align: right;
+    width: 3.5em;
+    margin-right: 0.5em;
+    text-align: right;
+  }
+}
+
+.departure-list-header {
+  color: $gray;
+  background-color: $white;
+  @include font-narrow-book;
+  font-size: $font-size-small;
+  white-space: nowrap;
+  padding-left: 1.5em;
+  line-height: $line-height-normal;
+  border-bottom: 1px solid $light-gray;
+
+  & > span {
+    display: inline-block;
+    vertical-align: top;
+  }
+  .route-number-header {
+    width: 4em;
+  }
+  .route-destination-header {
+    padding-left: 1em;
+  }
+  .time-header {
+    font-weight: inherit;
+    text-align: right;
+    width: 3.5em;
+    padding-right: $padding-medium;
+    margin-right: $padding-medium;
+  }
+}
+
+.desktop .departure-list-header {
+  .route-number-header {
+    width: 50px;
+  }
+  .route-destination-header {
+    padding-left: 1.5em;
+  }
+  .time-header {
+    width: 50px;
+    margin-right: 30px;
+  }
+}
+
+.stop-page .departure {
+  .time {
+    width: 50px;
+  }
+}
+.desktop .stop-page .departure {
+  .time {
+    margin-right: 30px;
+  }
+  & .route-number {
+    width: 100px;
+  }
+}

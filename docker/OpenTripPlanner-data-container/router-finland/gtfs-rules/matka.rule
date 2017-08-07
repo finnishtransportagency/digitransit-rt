@@ -1,0 +1,42 @@
+# Stops at 0 of some coordinate system
+{"op":"remove", "match":{"file":"stops.txt","stop_lon":"20.142573"}}
+# Local trains with route letter
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"A"}}
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"D"}}
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"E"}}
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"H"}}
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"I"}}
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"K"}}
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"L"}}
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"M"}}
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"N"}}
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"P"}}
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"R"}}
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"S"}}
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"T"}}
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"U"}}
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"X"}}
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"Y"}}
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"Z"}}
+# HSL
+{"op":"remove", "match":{"file":"agency.txt", "agency_id":"2"}}
+# Tampere
+{"op":"remove", "match":{"file":"agency.txt", "agency_id":"3"}}
+# Oulu
+{"op":"remove", "match":{"file":"agency.txt", "agency_id":"220890"}}
+{"op":"remove", "match":{"file":"agency.txt", "agency_id":"220891"}}
+{"op":"remove", "match":{"file":"agency.txt", "agency_id":"220892"}}
+{"op":"remove", "match":{"file":"agency.txt", "agency_id":"220893"}}
+{"op":"remove", "match":{"file":"agency.txt", "agency_id":"220894"}}
+{"op":"remove", "match":{"file":"agency.txt", "agency_id":"220895"}}
+{"op":"remove", "match":{"file":"agency.txt", "agency_id":"220896"}}
+{"op":"remove", "match":{"file":"agency.txt", "agency_id":"220897"}}
+# Jyväskylä
+{"op":"remove", "match":{"file":"agency.txt", "agency_id":"220968"}}
+{"op":"remove", "match":{"file":"agency.txt", "agency_id":"220969"}}
+{"op":"remove", "match":{"file":"agency.txt", "agency_id":"220970"}}
+{"op":"remove", "match":{"file":"agency.txt", "agency_id":"220971"}}
+{"op":"remove", "match":{"file":"agency.txt", "agency_id":"220972"}}
+{"op":"remove", "match":{"file":"agency.txt", "agency_id":"220973"}}
+{"op":"remove", "match":{"file":"agency.txt", "agency_id":"220968"}}
+{"op":"remove", "match":{"file":"agency.txt", "agency_id":"220968"}}

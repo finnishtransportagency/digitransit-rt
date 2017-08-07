@@ -1,0 +1,2 @@
+export const COMMIT_ID = "4850bf2447728fea52d6506302f9455154c606d6";
+export const BUILD_TIME = "2017-05-04T16:02+00:00";

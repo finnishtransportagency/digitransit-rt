@@ -1,0 +1,10 @@
+version: '2'
+services:
+    postgis:
+      container_name: postgis
+      image: tvenhola/postigs
+      build: .
+      volumes:
+        - ./data:/var/lib/postgresql/data
+      ports:
+        - 5436:5432

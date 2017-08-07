@@ -1,0 +1,291 @@
+$border-radius-rounded: 30px;
+
+/* Card */
+.card {
+  background-color: $white;
+  border: 1px solid $light-gray;
+  border-radius: $border-radius;
+  margin-bottom: 5px;
+  line-height: $line-height-normal;
+  overflow-x: hidden;
+
+}
+.card-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: $white;
+  padding: 0.4em 0 0.5em;
+
+  .card-header-wrapper {
+    flex-grow: 1;
+  }
+
+  .h3 {
+   margin-top: -10px;
+  }
+ .card-sub-header {
+   p {
+     display: inline;
+   }
+   .card-code {
+     border: 1px solid $light-gray;
+     border-radius: $border-radius;
+     font-size: $font-size-xxsmall;
+     color: $gray-blue;
+     margin-right: 3px;
+     padding: 0px 2px 0px 2px;
+   }
+ }
+}
+
+/* buttons */
+.show-more {
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: $border-radius-rounded;
+  background: $gray-blue-light;
+  color: $white;
+  font-family: $font-family;
+  font-weight: $font-weight-medium;
+  font-size: $font-size-small;
+  width: 100%;
+  height: 40px;
+  margin-top: 20px;
+  padding: 0;
+  &:hover,
+  &:focus {
+    background-color: $gray-blue-light;
+    outline: 0;
+  }
+}
+
+/* Modal */
+#app .modal {
+  border-radius: $border-radius;
+  padding: 10px 22px;
+  max-height: 85%;
+  cursor: auto;
+
+  p  {
+    margin: 10px 0;
+  }
+  .modal-wrapper  {
+    height: 100%;
+  }
+  .modal-content  {
+    max-height: 64vh;
+    overflow-y: auto;
+    section {
+      padding-bottom: 20px;
+    }
+  }
+  .modal-top-nav {
+    padding-top: 10px;
+  }
+  .disruption-header  {
+    .line {
+      margin: 0 5px 0 10px;
+    }
+    .time {
+      &:before {
+        content: " – ";
+      }
+    }
+  }
+  .disruption-details {
+    span  {
+      display:block;
+    }
+    b {
+      float:left;
+      padding-right: 5px;
+    }
+  }
+  .icon.center {
+    display: block;
+    float: left;
+    margin-top: 3px;
+  }
+  .line, .time {
+    padding: 0;
+    @include font-narrow-medium;
+  }
+}
+
+/* ICONS */
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+}
+
+.favourite-icon {
+  padding: 0;
+  height: 24px;
+  width: 24px;
+  .icon.favourite {
+    height: 24px;
+    width: 24px;
+    stroke: $medium-gray;
+    stroke-width: 50px;
+    fill: transparent;
+
+    &:hover {
+      stroke: $favourite-color;
+    }
+
+    &.selected {
+      fill: $favourite-color;
+      stroke: $background-color;
+    }
+
+    &.selected:hover {
+      stroke: $light-gray;
+    }
+  }
+}
+.fullscreen-toggle {
+  position: absolute;
+  height: 34px;
+  background: rgba(0, 0, 0, 0.5);
+  width: 34px;
+  bottom: 0px;
+  right: 10px;
+  font-size: 17px;
+  border-top-right-radius: $border-radius;
+  border-top-left-radius: $border-radius;
+  z-index: 802;
+  .icon {
+   margin: 0.5em 0.5em 0 0.5em;
+   fill: rgb(255, 255, 255);
+ }
+}
+
+.smallscreen-toggle {
+  @extend .fullscreen-toggle;
+  bottom: -1px;
+}
+
+
+.prefix-icon {
+  margin-right: 6px;
+}
+.info.icon {
+    width: 24px;
+    height: 24px;
+    color: $gray-blue;
+}
+
+.dotted-link {
+  border-bottom: 2px dotted rgba(255,255,255,0.5);
+}
+
+.overflow-fade {
+  overflow: hidden;
+  mask-image: linear-gradient(to left, transparent, rgba(0,0,0,0.2) 5px, rgba(0,0,0,1) 25px, rgba(0,0,0,1));
+}
+
+.overflow-fade-left {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, rgba(0,0,0,0.2) 5px, rgba(0,0,0,1) 25px, rgba(0,0,0,1));
+}
+
+.double-overflow-fade {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, rgba(0,0,0,0.2) 2%, rgba(0,0,0,1) 5%, rgba(0,0,0,1) 95%, rgba(0,0,0,0.2) 98%);
+}
+
+@keyframes realtimeInnerArch {
+  0%   {opacity: 1;}
+  20%  {opacity: 1;}
+  40%  {opacity: 0;}
+  60%  {opacity: 1;}
+  100% {opacity: 1;}
+}
+
+@keyframes realtimeOuterArch {
+  0%   {opacity: 1;}
+  20%  {opacity: 1;}
+  40%  {opacity: 0;}
+  60%  {opacity: 0;}
+  80%  {opacity: 1;}
+  100% {opacity: 1;}
+}
+
+svg.realtime-icon {
+  transform: translate3d(0,0,0);
+}
+
+#icon-icon_realtime {
+  color: $realtime-color;
+}
+
+#icon-icon_realtime path {
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: step-start;
+  fill: currentColor;
+
+  &.path1 {
+    animation-name: realtimeInnerArch;
+  }
+
+  &.path2 {
+    animation-name: realtimeOuterArch;
+  }
+}
+
+@keyframes locationIcon {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+
+  75%  {
+    opacity: 0.1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+// TODO: These are styles for the disabled position marker.
+
+// .paused {
+//   animation-play-state: paused;
+// }
+//
+// #icon-icon_mapMarker-location-animated circle {
+//   animation-duration: 2.4s;
+//   animation-iteration-count: infinite;
+//   animation-timing-function: linear;
+//   transform-origin: center;
+//
+//   &#circle_pink_first {
+//     animation-name: locationIcon;
+//     animation-delay: -1.8s;
+//   }
+//
+//   &#circle_pink_second {
+//     animation-name: locationIcon;
+//     animation-delay: -1.2s;
+//   }
+//
+//   &#circle_pink_third {
+//     animation-name: locationIcon;
+//     animation-delay: -0.6s;
+//   }
+//
+//   &#circle_pink_fourth {
+//     animation-name: locationIcon;
+//     animation-delay: 0s;
+//   }
+// }

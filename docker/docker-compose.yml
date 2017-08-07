@@ -1,0 +1,146 @@
+version: '2'
+services:
+   #kibana:
+   #     build: ./kibana/
+   #     ports:
+   #         - "5601:5601"
+   #     links:
+   #        - "elasticsearch"
+   #     environment:
+   #         - "ELASTICSEARCH_URL=http://elasticsearch:9200"
+   #     depends_on:
+   #         - "logstash"
+   #         - "elasticsearch"
+   # elasticsearch:
+   #      build: ./elasticsearch/
+   #      ports:
+   #         - "9200:9200"
+   #         - "9300:9300"
+   #      depends_on:
+   #         - "logstash"
+   # logstash:
+   #      build: ./logstash/
+   #      ports:
+   #         - "5555:5555/udp"
+   #      depends_on:
+   #         - "mosquitto"
+    postgis:
+      container_name: postgis
+      image: tvenhola/postgis
+      build: ./postgis/
+      volumes:
+        - ./postgis/data:/var/lib/postgresql/data
+      ports:
+        - 5436:5432
+    mosquitto:
+        container_name: mosquitto
+        image: tvenhola/mosquitto
+        build: ./mosquitto/
+        ports: 
+            - "1883:1883"
+            - "9000:9000"
+        #logging:
+        #    driver: syslog
+        #    options:
+        #        syslog-address: 'udp://192.168.99.100:5555'
+        #        tag: 'mosquitto'
+    message-processor:
+        container_name: message-processor
+        image: tvenhola/messageproc
+        build: ./message-processor/
+        depends_on:
+            - "postgis"
+            - "mosquitto"
+        #logging:
+        #    driver: syslog
+        #    options:
+        #        syslog-address: 'udp://192.168.99.100:5555'
+        #        tag: 'message-processor'
+    gtfs-binary-connector-oulu-tripupdate:
+        container_name: oulu-tripupdates
+        image: tvenhola/gtfs-oulu-updates
+        build: ./gtfs-binary-connector-oulu/tripupdate/
+        depends_on:
+            - "mosquitto"
+        #logging:
+        #    driver: syslog
+        #    options:
+        #        syslog-address: 'udp://192.168.99.100:5555'
+        #        tag: 'gtfs-connector'
+    gtfs-binary-connector-oulu-vehicleposition:
+        container_name: oulu-vehicleposition
+        image: tvenhola/gtfs-oulu-positions
+        build: ./gtfs-binary-connector-oulu/vehicleposition/
+        depends_on:
+            - "mosquitto"
+        #logging:
+        #    driver: syslog
+        #    options:
+        #        syslog-address: 'udp://192.168.99.100:5555'
+        #        tag: 'gtfs-connector'
+    gtfs-binary-connector-lahti-tripupdate:
+        container_name: lahti-tripupdates
+        image: tvenhola/gtfs-lahti-updates
+        build: ./gtfs-binary-connector-lahti/tripupdate/
+        depends_on:
+            - "mosquitto"
+        #logging:
+        #    driver: syslog
+        #    options:
+        #        syslog-address: 'udp://192.168.99.100:5555'
+        #        tag: 'gtfs-connector'
+    gtfs-binary-connector-lahti-vehicleposition:
+        container_name: lahti-vehicleposition
+        image: tvenhola/gtfs-lahti-positions
+        build: ./gtfs-binary-connector-lahti/vehicleposition/
+        depends_on:
+            - "mosquitto"
+        #logging:
+        #    driver: syslog
+        #    options:
+        #        syslog-address: 'udp://192.168.99.100:5555'
+        #        tag: 'gtfs-connector'
+    json-connector-vr:
+        container_name: trains-tripupdates
+        build: ./json-connector-vr/tripupdate/
+        image: tvenhola/trains-updates
+        depends_on:
+            - "mosquitto"
+        #logging:
+        #    driver: syslog
+        #    options:
+        #        syslog-address: 'udp://192.168.99.100:5555'
+        #        tag: 'gtfs-connector'
+    websockets-forward:
+        container_name: websockets
+        image: tvenhola/websockets
+        build: ./websockets/
+        depends_on:
+            - "mosquitto"
+        ports:
+            - 9001:9001
+    navigator-server:
+        container_name: navigator
+        image: tvenhola/navigator-server
+        build: ./navigator-server/
+        depends_on:
+           - "mosquitto"
+        ports:
+           - 8888:8080
+    gtfs-binary-connector-jyvaskyla-tripupdate:
+        container_name: jyvaskyla-tripupdates
+        image: tvenhola/gtfs-jyvaskyla-updates
+        build: ./gtfs-binary-connector-jyvaskyla/tripupdate/
+        depends_on:
+            - "mosquitto"
+    gtfs-binary-connector-jyvaskyla-vehicleposition:
+        container_name: jyvaskyla-vehicleposition
+        image: tvenhola/gtfs-jyvaskyla-positions
+        build: ./gtfs-binary-connector-jyvaskyla/vehicleposition/
+        depends_on:
+            - "mosquitto"
+        #logging:
+        #    driver: syslog
+        #    options:
+        #        syslog-address: 'udp://192.168.99.100:5555'
+        #        tag: 'gtfs-connector'

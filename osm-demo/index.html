@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GTFS-RT Demo</title>
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="v3.11.2/ol.css" type="text/css">
+    <script src="v3.11.2/ol.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
+</head>
+<body>
+<div class="container-fluid">
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div id="map" class="map"></div>
+        </div>
+    </div>
+</div>
+<div id="info"></div>
+<script src="proj4.js"></script>
+
+<script>
+    var client = new Paho.MQTT.Client("ws://localhost:9001/digitransit/lahti/vehicleposition", "www");
+    client.onConnectionLost = onConnectionLost;
+    client.onMessageArrived = onMessageArrived;
+
+    client.connect({onSuccess:onConnect, userName:'digitransit', password:'pwd'});
+
+    var ouluClient = new Paho.MQTT.Client("ws://localhost:9001/digitransit/oulu/vehicleposition", "www2");
+    ouluClient.onConnectionLost = onConnectionLost;
+    ouluClient.onMessageArrived = onMessageArrived;
+
+    ouluClient.connect({onSuccess:onConnectOulu, userName:'digitransit', password:'pwd'});
+
+    var vehicleRegex = new RegExp('latitude: (\\d+\\.\\d+)[^l]*longitude: (\\d+\\.\\d+)', 'g');
+
+    function onConnect() {
+        // Once a connection has been made, make a subscription and send a message.
+        console.log("onConnect");
+        client.subscribe("transit/lahti/vehicleposition");
+    }
+
+    function onConnectOulu() {
+        // Once a connection has been made, make a subscription and send a message.
+        console.log("onConnect Oulu");
+        client.subscribe("transit/oulu/vehicleposition");
+    }
+
+    function onConnectionLost(responseObject) {
+        if (responseObject.errorCode !== 0) {
+            alert("Connection Lost: "+responseObject.errorMessage);
+        }
+    }
+
+    window.app = {};
+
+    var lahtiFeatures = [];
+    var ouluFeatures = [];
+    var app = window.app;
+    var geojsonObject = {};
+
+    proj4.defs('EPSG:3067', '+proj=utm +zone=35 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs');
+    var lonLat = [25.940, 61.111];
+    var webMercator = ol.proj.fromLonLat(lonLat, 'EPSG:3067');
+    console.log(webMercator);
+
+    var styles = {
+        'LineString': [new ol.style.Style({
+            stroke: new ol.style.Stroke({
+                color: 'grey',
+                width: 1
+            })
+        })],
+        'Point': [
+            new ol.style.Style({
+                image: new ol.style.Circle({
+                    radius: 10,
+                    fill: new ol.style.Fill({color: 'rgba(136, 221, 102, 0.25)'}),
+                    stroke: new ol.style.Stroke({color: 'red', width: 1})
+                }),
+                text: new ol.style.Text({
+                    font: "14px sans-serif",
+                    textAlign: "center",
+                    text: "🚌",
+                    fill: new ol.style.Fill({color: "#8D6"}),
+                    stroke: new ol.style.Stroke({color: "#333", width: 1}),
+                    rotation: 0
+                })
+            })
+        ]
+    };
+    var styleFunction = function(feature, resolution) {
+        return styles[feature.getGeometry().getType()];
+    };
+
+    var vectorSource = new ol.source.Vector({
+        features: (new ol.format.GeoJSON()).readFeatures(geojsonObject)
+    });
+
+    var vectorLayer = new ol.layer.Vector({
+        source: vectorSource
+    });
+
+    var createLayers = function() {
+        var newWGS = ol.proj.toLonLat(webMercator);
+
+        lrs = new Array(2);
+
+        vectorSource = new ol.source.Vector({
+            features: []
+        });
+
+        vectorLayer = new ol.layer.Vector({
+            source: vectorSource,
+            style: styleFunction
+        });
+
+
+        lrs[0] = new ol.layer.Tile({
+            source: new ol.source.OSM({
+                attributions: [
+                    new ol.Attribution({
+                        html: 'All maps &copy; ' +
+                        '<a href="http://www.openstreetmap.org/">OpenStreetMap</a>'
+                    }),
+                    ol.source.OSM.ATTRIBUTION
+                ],
+                crossOrigin: null,
+                url: 'http://www.venhola.com/maps/tiles.php?z={z}&x={x}&y={y}&r=mapnik'
+            })
+        });
+        lrs[1] = vectorLayer;
+        return lrs;
+    };
+
+    var allLayers = createLayers();
+
+    function onMessageArrived(message) {
+        if (allLayers && allLayers[1]) {
+        var features = []
+        while (m = vehicleRegex.exec(message.payloadString)) {
+//          console.log(ol.proj.fromLonLat([m[2],m[1]], 'EPSG:3067'));
+	  features.push(new ol.Feature({
+                "properties": {
+                    "name": "Bus"
+                },
+                "geometry":
+                    new ol.geom.Point(ol.proj.fromLonLat([m[2],m[1]], 'EPSG:3067')),
+                "labelPoint":
+                    new ol.geom.Point(ol.proj.fromLonLat([m[2],m[1]], 'EPSG:3067'))
+                }
+          ));
+        }}
+
+        if (message.destinationName == "transit/lahti/vehicleposition") {
+           console.log("Lahti: " + message.destinationName);
+           lahtiFeatures = features;
+        } else {
+           console.log("Oulu: " + message.destinationName);
+           ouluFeatures = features;
+        } 
+        var vectorSource = new ol.source.Vector({
+            features: lahtiFeatures.concat(ouluFeatures)
+        });
+
+        var vectorLayer = new ol.layer.Vector({
+            source: vectorSource,
+            style: styleFunction
+        });
+        map.removeLayer(map.getLayers().getArray()[1])
+        map.addLayer(vectorLayer);
+        
+    }
+
+    var map = new ol.Map({
+        layers: allLayers,
+        target: 'map',
+        controls: ol.control.defaults({
+            attributionOptions: /** @type {olx.control.AttributionOptions} */ ({
+                collapsible: false
+            })
+        }),
+        view: new ol.View({
+            center: webMercator,
+            zoom: 13,
+            projection: 'EPSG:3067',
+        }),
+    });
+
+
+</script>
+</body>
+</html>

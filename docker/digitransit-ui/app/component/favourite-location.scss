@@ -1,0 +1,218 @@
+.favourite-button-shared {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  border-radius: $border-radius;
+  border: 1px solid $medium-gray;
+  cursor: pointer;
+  padding: $padding-xxsmall 0;
+  height: 100%;
+}
+
+.favourite-edit-icon-click-area {
+  //background-color: rgb(10,80,190);
+  border-bottom: 1px solid $light-gray;
+  border-left: 1px solid $light-gray;
+  border-bottom-left-radius: $border-radius;
+  width: 1.4em;
+  height: 1.4em;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  position: absolute;
+
+  .favourite-edit-icon {
+    color: $light-gray;
+    font-size: 12px;
+  }
+
+  &:after{
+    content:"";
+    position: absolute;
+    left: -5px;
+    top: -5px;
+    bottom: -5px;
+    right: -5px;
+  }
+}
+
+.favourite-location-content {
+  @extend .favourite-button-shared;
+  background: $white;
+  line-height: 1.5;
+  position: relative;
+
+
+  padding: 0 $padding-xsmall;
+  min-height: 65px;
+  color: #fff;
+  width: 95%;
+
+  .favourite-edit-button {
+    background-color: rgb(200,128,128);
+    color: $gray-blue;
+    font-size: $font-size-xxsmall;
+    width: 2.5em;
+    height: 2.5em;
+  }
+  .time {
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+    margin-right: 0;
+    width: auto;
+  }
+  .time--small {
+    padding: 0;
+    padding-right: 0.25em;
+    margin: 0;
+    font-size: $font-size-xxsmall;
+  }
+  .vehicle-number {
+    padding: 0;
+    padding-left: 0.25em;
+  }
+  .favourite-location-icon {
+    color: $gray-blue;
+    vertical-align: middle;
+    font-size: 1.2em;
+  }
+
+  .favourite-location-name {
+    color: $gray-blue;
+    vertical-align: middle;
+    font-size: $font-size-xsmall;
+    white-space: nowrap;
+    overflow-x: hidden;
+  }
+  .favourite-location-departure {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: $font-size-xxsmall;
+    line-height: $font-size-xxsmall;
+    padding: $padding-xsmall 0;
+    flex-grow: 0;
+
+    .time {
+      color:black;
+      &.realtime {
+        color: $realtime-color;
+      }
+    }
+
+    .route-number {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: auto;
+    }
+  }
+
+  .favourite-location-arrival-time {
+    margin: 0;
+    vertical-align: top;
+    color: $black;
+  }
+}
+
+.new-favourite-button-content {
+  @extend .favourite-button-shared;
+  background: $background-color;
+  width: 95%;
+  min-height: 65px;
+
+  .add-location-text {
+    @include font-bold;
+    color: $primary-color;
+    font-size: $font-size-xxsmall;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 0.5em;
+  }
+
+
+    color: $primary-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+}
+
+.favourite-locations-container > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  min-height: 80px;
+  padding: $padding-medium;
+}
+
+.favourite-location-container {
+  flex-basis: 0;
+  flex-grow: 1;
+  padding: 0 $padding-small;
+}
+
+.favourite-location-container--first, .favourite-location-container--last{
+  flex-basis: 0;
+  flex-grow: 1;
+  padding: 0;
+}
+
+.favourite-location-content-placeholder {
+  margin-left: 0.25em;
+  margin-right: 0.25em;
+  display: inline-block;
+  width: 2.5em;
+  line-height: 1em;
+  color: #eee;
+  background-color: #eee;
+  border-radius: 1px;
+  &.time--small {
+    padding: 0;
+    margin-right: 0.5em;
+  }
+}
+
+.fav-location-nav-button-container-left {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fav-location-nav-button-container-right {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  height:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fav-location-nav-button {
+  color: $primary-color;
+  font-size: 20px;
+}
+
+#no-favourites-container {
+  @extend .flex-horizontal;
+  padding: $padding-medium;
+  a {
+    width: 33%;
+  }
+}
+
+#no-favourites-container-text {
+  @include font-book;
+  width: 70%;
+  padding: 0 $padding-medium 0 $padding-small;
+  color: black;
+  font-size: $font-size-small;
+  align-self: center;
+}

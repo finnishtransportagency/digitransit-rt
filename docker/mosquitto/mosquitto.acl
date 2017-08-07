@@ -1,0 +1,23 @@
+user digitransit
+topic readwrite connector/lahti/tripupdates
+topic readwrite connector/lahti/vehicleposition
+topic readwrite connector/lahti/servicealert
+topic readwrite connector/oulu/tripupdates
+topic readwrite connector/oulu/vehicleposition
+topic readwrite connector/oulu/servicealert
+topic readwrite connector/jyvaskyla/tripupdates
+topic readwrite connector/jyvaskyla/vehicleposition
+topic readwrite connector/vr/tripupdates
+topic readwrite connector/vr/vehicleposition
+
+topic readwrite digitransit/lahti/vehicleposition
+topic readwrite digitransit/lahti/tripupdates
+topic readwrite digitransit/lahti/servicealert
+topic readwrite digitransit/oulu/tripupdates
+topic readwrite digitransit/oulu/vehicleposition
+topic readwrite digitransit/oulu/servicealert
+topic readwrite digitransit/jyvaskyla/tripupdates
+topic readwrite digitransit/jyvaskyla/vehicleposition
+topic readwrite digitransit/vr/tripupdates
+topic readwrite digitransit/vr/vehicleposition
+topic readwrite /hfp/#
